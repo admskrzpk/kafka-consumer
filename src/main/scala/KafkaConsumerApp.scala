@@ -29,4 +29,3 @@ object KafkaConsumerApp extends App {
   }
   consumer.close()
 }
-
