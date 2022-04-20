@@ -1,7 +1,8 @@
-import java.time.Duration
 
-object KafkaClientApp extends App {
 
+object KafkaConsumerApp extends App {
+
+  import java.time.Duration
   import org.apache.kafka.clients.consumer.KafkaConsumer
   import java.util
   import java.util.Properties
@@ -15,14 +16,14 @@ object KafkaClientApp extends App {
   props.put("auto.commit.interval.ms", "1000")
   val consumer = new KafkaConsumer[String, String](props)
 
-  consumer.subscribe(util.Arrays.asList("adam", "skrzypek"))
+  consumer.subscribe(util.Arrays.asList("janusz"))
 
   while ( {
     true
   }) {
     val records = consumer.poll(Duration.ofMillis(100))
       .forEach(record => {
-        println("offset = %d, key = %s, value = %s%n", record.offset, record.key, record.value)
+        println(s"offset = ${record.offset}, key = ${record.key}, value = ${record.value}")
       })
   }
 }
